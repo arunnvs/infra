@@ -16,7 +16,7 @@ spec:
         app: meetup-nginx
     spec:
       containers:
-      - image: registry.hub.docker.com/arunvarghe/nginx:latest
+      - image: registry.hub.docker.com/sarunn/meetup-prod-nginx:43
         imagePullPolicy: Always
         name: meetup-nginx
         ports:
