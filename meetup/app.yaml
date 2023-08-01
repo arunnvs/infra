@@ -16,7 +16,7 @@ spec:
         app: meetup-app-prod
     spec:
       containers:
-      - image: registry.hub.docker.com/sarunn/meetup-prod-php:43
+      - image: registry.hub.docker.com/arunvarghe/meetup:latest
         imagePullPolicy: Always
         name: meetup-app-prod
         ports:
