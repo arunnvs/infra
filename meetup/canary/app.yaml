@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: meetup-app-prod
+  namespace: meetup
+  lables:
+    app: meetup-app-prod
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: meetup-app-prod
+  template:
+    metadata:
+      labels:
+        app: meetup-app-prod
+    spec:
+      containers:
+      - name: meetup-app-prod
+        image: registry.hub.docker.com/arunvarghe/meetup:latest
+        ports:
+        - containerPort: 9000
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 1h # 1 hour
+      - setWeight: 20
+      - pause: {} # pause indefinitely

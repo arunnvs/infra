@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: meetup-nginx
+  namespace: meetup
+  lables:
+    app: meetup-nginx
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: meetup-nginx
+  template:
+    metadata:
+      labels:
+        app: meetup-nginx
+    spec:
+      containers:
+      - name: meetup-nginx
+        image: registry.hub.docker.com/arunvarghe/nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 1h # 1 hour
+      - setWeight: 20
+      - pause: {} # pause indefinitely
