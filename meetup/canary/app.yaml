@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: meetup-app-prod
-        image: registry.hub.docker.com/arunvarghe/meetup:78
+        image: registry.hub.docker.com/arunvarghe/meetup:79
         ports:
         - containerPort: 9000
   minReadySeconds: 30
