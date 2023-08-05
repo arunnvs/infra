@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: meetup-nginx
+  namespace: meetupbg
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: meetup-nginx
+  template:
+    metadata:
+      labels:
+        app: meetup-nginx
+    spec:
+      containers:
+      - name: meetup-nginx
+        image: registry.hub.docker.com/arunvarghe/nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  strategy:
+    blueGreen: 
+      activeService: meetup-nginx-service-active
