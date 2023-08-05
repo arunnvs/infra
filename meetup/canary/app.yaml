@@ -4,7 +4,7 @@ metadata:
   name: meetup-app-prod
   namespace: meetup
 spec:
-  replicas: 10
+  replicas: 4
   selector:
     matchLabels:
       app: meetup-app-prod
