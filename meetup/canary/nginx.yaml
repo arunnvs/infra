@@ -3,8 +3,6 @@ kind: Rollout
 metadata:
   name: meetup-nginx
   namespace: meetup
-  lables:
-    app: meetup-nginx
 spec:
   replicas: 10
   selector:

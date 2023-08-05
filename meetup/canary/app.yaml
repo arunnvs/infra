@@ -3,8 +3,6 @@ kind: Rollout
 metadata:
   name: meetup-app-prod
   namespace: meetup
-  lables:
-    app: meetup-app-prod
 spec:
   replicas: 10
   selector:
